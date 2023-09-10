@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 
-axios.defaults.baseURL = "https://dorm-deals-backend.vercel.app/";
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
 
 const Login = () => {
   const [email, setEmail] = useState("");
