@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://dorm-deals-backend.vercel.app/";
 
 const Signup = () => {
   const [name, setName] = useState("");
