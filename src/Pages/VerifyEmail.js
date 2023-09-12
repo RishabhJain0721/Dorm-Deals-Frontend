@@ -24,6 +24,8 @@ const VerifyEmail = () => {
       })
       .catch((error) => {
         console.error("Email verification failed:", error);
+        alert("Email verification failed.")
+        navigate("/")
         // Handle the error, e.g., display an error message.
       });
   }, [token, navigate]); // Include navigate in the dependency array

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 
-axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
+axios.defaults.baseURL = "http://localhost:5000/";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -18,13 +18,27 @@ const Signup = () => {
       .post("/api/auth/signup", { name, email, password })
 
       .then((res) => {
+        // alert("Verification email sent. Please verify your email to login.");
+        alert(res.data.message)
         console.log(res.data);
         setName("");
         setEmail("");
         setPassword("");
       })
       .catch((err) => {
+      if (err.response && err.response.status === 400) {
+        // If the response status is 400, it's a duplicate user
+        alert("User already exists. Please login.")
+        setName("");
+        setEmail("");
+        setPassword("");
+      }
+      else if(err.response && err.response.status === 401){
+        alert("Invalid Email");
+      } 
+      else {
         console.log(err);
+      }
       });
   };
 
