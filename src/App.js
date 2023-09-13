@@ -1,12 +1,19 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import LandingPage from "./Pages/Landing";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
 import VerifyEmail from "./Pages/VerifyEmail";
+import { AuthContext } from "./Contexts/AuthContext";
 
 const App = () => {
+
+  const { currentUser } = useContext(AuthContext);
+
+  const RequireAuth = ({ children }) => {
+    return currentUser ? children : <Navigate to="/login" />;
+  };
   return (
     <div>
       <BrowserRouter>
@@ -14,7 +21,7 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
           <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </BrowserRouter>

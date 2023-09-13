@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
+import { AuthContext } from "../Contexts/AuthContext";
 
 axios.defaults.baseURL = "http://localhost:5000/";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,11 +21,14 @@ const Login = () => {
 
       .then((res) => {
         console.log(res.data);
+        dispatch({ type: "LOGIN", payload: {name:res.data.name,token:res.data.token} });
+        navigate("/dashboard");
         setEmail("");
         setPassword("");
       })
       .catch((err) => {
         console.log(err);
+        alert(err.response.data.message)
       });
   };
 
