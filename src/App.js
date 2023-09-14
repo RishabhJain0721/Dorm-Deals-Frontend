@@ -5,6 +5,8 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
 import VerifyEmail from "./Pages/VerifyEmail";
+import ItemInfo from "./components/ItemInfo";
+import Seller from "./Pages/Seller";
 import { AuthContext } from "./Contexts/AuthContext";
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
           <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/itemInfo" element={<ItemInfo />} />
+          <Route path="/seller" element={<Seller />} />
         </Routes>
       </BrowserRouter>
     </div>

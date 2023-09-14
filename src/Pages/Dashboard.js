@@ -1,5 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Items from "../components/Items";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -7,15 +9,16 @@ const Dashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("token");
-    navigate('/');
+    navigate("/");
   };
-  
+
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Navbar />
+      <Items />
       <button onClick={handleLogout}>Log out</button>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
