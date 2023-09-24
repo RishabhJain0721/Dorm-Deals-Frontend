@@ -16,6 +16,8 @@ const App = () => {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
+
+  
   return (
     <div>
       <BrowserRouter>
@@ -23,10 +25,10 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
           <Route path="/verify-email" element={<VerifyEmail />} />
-          <Route path="/itemInfo" element={<ItemInfo />} />
-          <Route path="/seller" element={<Seller />} />
+          <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+          <Route path="/dashboard/itemInfo" element={<ItemInfo />} />
+          <Route path="/dashboard/sell-item" element={<Seller />} />
         </Routes>
       </BrowserRouter>
     </div>

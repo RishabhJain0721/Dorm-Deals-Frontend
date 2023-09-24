@@ -15,7 +15,6 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Add authentication logic here
     axios
       .post("/api/auth/login", { email, password })
 

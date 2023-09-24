@@ -2,7 +2,6 @@ import React from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import { Carousel } from 'react-responsive-carousel'; // Import Carousel component
 import Cooler from '../Images/1.jpg';
-import Profile from '../Images/2.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin,faPhoneVolume,faUser,faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons'
 import Navbar from './Navbar';
@@ -19,7 +18,7 @@ const ItemInfo = () => {
             <img src={Cooler} alt="Product" />
           </div>
           <div>
-            <img src={Profile} alt="Product" />
+            <img src={Cooler} alt="Product" />
           </div>
           <div>
             <img src={Cooler} alt="Product" />
@@ -32,7 +31,7 @@ const ItemInfo = () => {
           <h2 className="text-2xl font-semibold">Cooler</h2>
 
           {/* Price */}
-          <p className="text-red-600 text-md mb-4">  <span className='line-through text-gray-500 text-xs mr-2 '><FontAwesomeIcon icon={faIndianRupeeSign} />- 40 </span><FontAwesomeIcon icon={faIndianRupeeSign} /> -19.99</p>
+          <p className="text-red-600 text-md mb-4">  <FontAwesomeIcon icon={faIndianRupeeSign} /> 1000</p>
           <hr />
 
           {/* Description */}

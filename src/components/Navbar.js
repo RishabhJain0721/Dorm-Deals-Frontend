@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Profile from '../Images/4.jpg';
-import { FaSearch, FaPlus, FaCaretDown } from 'react-icons/fa'; // Import the FaCaretDown icon
+import { FaSearch, FaCaretDown } from 'react-icons/fa'; // Import the FaCaretDown icon
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -13,6 +13,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-900 p-4 flex justify-between items-center">
+      
         {/* Left Section */}
         <div className="text-white text-2xl font-bold ml-8 flex items-center">
           DormDeals<span className="text-red-500 text-3xl">.</span>
@@ -78,7 +79,7 @@ const Navbar = () => {
           <Link to="/about" className="text-white hover:text-red-500 px-4 transition duration-300 ease-in-out">
             About us
           </Link>
-          <Link to="/sell" className="text-white bg-red-500 rounded-3xl hover:text-red-500 px-4 transition duration-300 ease-in-out">
+          <Link to="/dashboard/sell-item" className="text-white bg-red-500 rounded-3xl hover:text-red-500 px-4 transition duration-300 ease-in-out">
             Sell
           </Link>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ label, type, placeholder, value, onChange }) => {
+const Input = ({ label, type,name, placeholder, value, onChange }) => {
   return (
     <div className="mb-4">
       <label className="block text-white text-sm mb-2">
@@ -8,10 +8,12 @@ const Input = ({ label, type, placeholder, value, onChange }) => {
       </label>
       <input
         type={type}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        name={name}
+        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        required
       />
     </div>
   );
