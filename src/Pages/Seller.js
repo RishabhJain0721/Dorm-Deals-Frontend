@@ -28,6 +28,7 @@ const SellForm = () => {
     const formData = new FormData();
 
     formData.append("userToken", JSON.parse(localStorage.getItem("details")).token);
+    formData.append("userName", JSON.parse(localStorage.getItem("details")).name);
     formData.append("itemName", itemName);
     formData.append("itemCost", itemCost);
     formData.append("itemDescription", itemDescription);
