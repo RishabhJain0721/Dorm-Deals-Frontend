@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -23,8 +23,7 @@ const ItemInfo = () => {
 
   const clearItemContext = () => {
     itemDispatch({ type: "DETAILSCLOSED" });
-  }
-
+  };
 
   return (
     <>
@@ -45,16 +44,34 @@ const ItemInfo = () => {
             autoPlay
             showArrows={true}
             showThumbs={false}
-            className="w-1/4 p-2"
+            className="w-1/4 p-2 cursor-pointer"
           >
             <div>
-              <img src={imageArray[0]} alt="Product" />
+              <a href={imageArray[0]} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={imageArray[0]}
+                  className="h-32 object-cover"
+                  alt="Product"
+                />
+              </a>
             </div>
             <div>
-              <img src={imageArray[1]} alt="Product" />
+              <a href={imageArray[1]} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={imageArray[1]}
+                  className="h-32 object-cover"
+                  alt="Product"
+                />
+              </a>
             </div>
             <div>
-              <img src={imageArray[2]} alt="Product" />
+              <a href={imageArray[2]} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={imageArray[2]}
+                  className="h-32 object-cover"
+                  alt="Product"
+                />
+              </a>
             </div>
           </Carousel>
           {/* Product Details */}

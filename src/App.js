@@ -9,6 +9,7 @@ import ItemInfo from "./components/ItemInfo";
 import Seller from "./Pages/Seller";
 import { AuthContext } from "./Contexts/AuthContext";
 import { ItemContextProvider } from "./Contexts/ItemContext";
+import { SearchContextProvider } from "./Contexts/SearchContext";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
@@ -20,25 +21,27 @@ const App = () => {
   return (
     <div>
       <ItemContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route
-              path="/dashboard"
-              element={
-                <RequireAuth>
-                  <Dashboard />
-                </RequireAuth>
-              }
-            />
-            <Route path="/dashboard/itemInfo" element={<ItemInfo />} />
-            <Route path="/dashboard/sell-item" element={<Seller />} />
-            <Route path="/dashboard/item/:id" element={<ItemInfo />} />
-          </Routes>
-        </BrowserRouter>
+        <SearchContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <RequireAuth>
+                    <Dashboard />
+                  </RequireAuth>
+                }
+              />
+              <Route path="/dashboard/itemInfo" element={<ItemInfo />} />
+              <Route path="/dashboard/sell-item" element={<Seller />} />
+              <Route path="/dashboard/item/:id" element={<ItemInfo />} />
+            </Routes>
+          </BrowserRouter>
+        </SearchContextProvider>
       </ItemContextProvider>
     </div>
   );

@@ -19,7 +19,7 @@ const ItemCard = (props) => {
   return (
     <div
       onClick={moreInfo}
-      className="bg-gray-100 shadow-lg rounded-lg overflow-hidden flex flex-col justify-center items-center hover:translate-y-[-5px] transition duration-300 ease-in-out w-50 p-2 m-5 mx-10"
+      className="bg-gray-100 hover:cursor-pointer shadow-lg rounded-lg overflow-hidden flex flex-col justify-center items-center hover:translate-y-[-5px] transition duration-300 ease-in-out w-50 p-2 m-5 mx-10"
     >
       {/* Product Image(First image from the three uploaded ones) */}
       <img
