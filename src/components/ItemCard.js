@@ -11,9 +11,9 @@ const ItemCard = (props) => {
 
   const { itemDispatch } = useContext(ItemContext);
 
-  const moreInfo = () => {
+  const moreInfo = async () => {
+    await itemDispatch({ type: "DETAILSOPENED", payload: { item: props.rest } });
     navigate(`/dashboard/item/${props.rest._id}`);
-    itemDispatch({ type: "DETAILSOPENED", payload: { item: props.rest } });
   };
 
   return (

@@ -1,18 +1,18 @@
 const ItemReducer = (itemState, action) => {
-    switch (action.type) {
-      case "DETAILSOPENED": {
-        return {
-          currentItem: action.payload,
-        };
-      }
-      case "DETAILSCLOSED": {
-        return {
-          currentItem: null,
-        };
-      }
-      default:
-        return itemState;
+  switch (action.type) {
+    case "DETAILSOPENED": {
+      return {
+        currentItem: action.payload,
+      };
     }
-  };
-  
-  export default ItemReducer;
+    case "DETAILSCLOSED": {
+      return {
+        currentItem: null,
+      };
+    }
+    default:
+      return itemState;
+  }
+};
+
+export default ItemReducer;

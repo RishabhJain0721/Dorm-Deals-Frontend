@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React,{useContext} from "react";
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +9,11 @@ import {
   faUser,
   faIndianRupeeSign,
 } from "@fortawesome/free-solid-svg-icons";
-import Navbar from "./Navbar";
 import { ItemContext } from "../Contexts/ItemContext";
 
 const ItemInfo = () => {
-  const { currentItem } = useContext(ItemContext);
+  const { itemDispatch } = useContext(ItemContext);
+  const currentItem = JSON.parse(localStorage.getItem("item"));
   const finalItem = currentItem.item;
   const imageArray = finalItem.images.map((img) => {
     const base64Image = img.buffer;
@@ -20,10 +21,23 @@ const ItemInfo = () => {
     return `data:${imageType};base64,${base64Image}`;
   });
 
+  const clearItemContext = () => {
+    itemDispatch({ type: "DETAILSCLOSED" });
+  }
+
+
   return (
     <>
-      <Navbar />
-      <div className="overflow-hidden flex items-center h-screen justify-center bg-gray-800 ">
+      <div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">
+        <div className=" items-start w-full m-5 px-14">
+          <Link
+            to="/dashboard"
+            onClick={clearItemContext}
+            className="text-white bg-red-500 rounded-3xl hover:bg-red-700 px-6 py-2 transition duration-300 ease-in-out"
+          >
+            Dashboard
+          </Link>
+        </div>
         <div className="bg-white shadow-lg rounded-lg flex items-center mx-14 ">
           {/* Image Carousel */}
           <Carousel
@@ -43,7 +57,6 @@ const ItemInfo = () => {
               <img src={imageArray[2]} alt="Product" />
             </div>
           </Carousel>
-
           {/* Product Details */}
           <div className="p-4 px-10 w-3/4 ">
             {/* Product Name */}
