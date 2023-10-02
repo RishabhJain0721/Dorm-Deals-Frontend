@@ -1,18 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ItemContext } from "../Contexts/ItemContext";
 
 const ItemCard = (props) => {
   const navigate = useNavigate();
 
-  const base64Image = props.rest.images[0].buffer;
-  const imageType = props.rest.images[0].mimetype;
+  const base64Image = props.rest.image.buffer;
+  const imageType = props.rest.image.mimetype;
   const src = `data:${imageType};base64,${base64Image}`;
 
-  const { itemDispatch } = useContext(ItemContext);
-
   const moreInfo = async () => {
-    await itemDispatch({ type: "DETAILSOPENED", payload: { item: props.rest } });
     navigate(`/dashboard/item/${props.rest._id}`);
   };
 

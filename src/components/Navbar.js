@@ -14,7 +14,6 @@ const Navbar = () => {
   };
 
   const searchSubmitHandler = () => {
-    console.log(searchInput);
     setSearchInput("");
     searchDispatch({
       type: "SEARCHSTARTED",

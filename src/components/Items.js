@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 import axios from "axios";
 import { SearchContext } from "../Contexts/SearchContext";
+import { InfinitySpin } from "react-loader-spinner";
 
 export default function Items() {
   const [items, setItems] = useState([]);
@@ -16,7 +17,6 @@ export default function Items() {
         setItems(res.data);
         setSearchedItems(res.data);
         setLoading(false);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -38,7 +38,9 @@ export default function Items() {
     <>
       {" "}
       {loading ? (
-        <p>loading</p>
+        <div className="flex items-center justify-center h-96">
+          <InfinitySpin width="200" color="#424242" />
+        </div>
       ) : (
         <div className="p-5 flex flex-wrap px-10 ">
           {searchedItems.map((item) => (
