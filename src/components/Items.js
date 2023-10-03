@@ -16,6 +16,7 @@ export default function Items() {
       .then((res) => {
         setItems(res.data);
         setSearchedItems(res.data);
+        console.log("In Items rendered on dashboard : ", res.data)
         setLoading(false);
       })
       .catch((err) => {

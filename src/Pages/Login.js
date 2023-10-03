@@ -19,7 +19,7 @@ const Login = () => {
       .post("/api/auth/login", { email, password })
 
       .then((res) => {
-        console.log(res.data);
+        console.log("Login Successful");
         dispatch({ type: "LOGIN", payload: {name:res.data.name,token:res.data.token} });
         navigate("/dashboard");
         setEmail("");

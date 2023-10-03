@@ -27,10 +27,12 @@ const YellowButton = (props) => {
 };
 
 const BlueButton = (props) => {
+  const navigate = useNavigate();
+  
   return (
     <button
-      type="submit"
       className="bg-blue-500 text-white rounded-full py-2 px-4 mt-4 hover:bg-blue-600"
+      onClick={() => navigate(props.navigation)}
     >
       {props.val}
     </button>

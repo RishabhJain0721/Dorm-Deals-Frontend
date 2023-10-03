@@ -13,12 +13,10 @@ const Signup = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    // Add user registration logic here
     axios
       .post("/api/auth/signup", { name, email, password })
 
       .then((res) => {
-        // alert("Verification email sent. Please verify your email to login.");
         alert(res.data.message)
         console.log(res.data);
         setName("");
