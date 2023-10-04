@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import Profile from "../Images/4.jpg";
 import { FaSearch, FaCaretDown } from "react-icons/fa";
+import { IoPersonOutline } from "react-icons/io5";
 import { SearchContext } from "../Contexts/SearchContext";
 
 const Navbar = () => {
@@ -119,14 +119,10 @@ const Navbar = () => {
 
         {/* Right Section */}
         <div className="text-white flex items-center">
-          <div className="rounded-full overflow-hidden h-8 w-8 mr-2">
-            <img
-              src={Profile} // Replace with the path to your image
-              alt="Profile"
-              className="h-full w-full object-cover"
-            />
+          <div className="rounded-full flex justify-center items-center h-8 w-8 ">
+            <IoPersonOutline />
           </div>
-          <Link to="/profile" className="hover:underline">
+          <Link to="/dashboard/profile" className="hover:underline">
             My Account
           </Link>
         </div>

@@ -8,6 +8,7 @@ import Dashboard from "./Pages/Dashboard";
 import VerifyEmail from "./Pages/VerifyEmail";
 import ItemInfo from "./components/ItemInfo";
 import Seller from "./Pages/Seller";
+import About from "./Pages/About";
 import { AuthContext } from "./Contexts/AuthContext";
 import { ItemContextProvider } from "./Contexts/ItemContext";
 import { SearchContextProvider } from "./Contexts/SearchContext";
@@ -28,7 +29,6 @@ const App = () => {
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
               <Route
                 path="/dashboard"
@@ -38,9 +38,11 @@ const App = () => {
                   </RequireAuth>
                 }
               />
+              <Route path="/dashboard/profile" element={<Profile />} />
               <Route path="/dashboard/itemInfo" element={<ItemInfo />} />
               <Route path="/dashboard/sell-item" element={<Seller />} />
               <Route path="/dashboard/item/:id" element={<ItemInfo />} />
+              <Route path="/about" element={<About />} />
             </Routes>
           </BrowserRouter>
         </SearchContextProvider>

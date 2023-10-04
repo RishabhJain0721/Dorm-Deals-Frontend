@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Contexts/AuthContext";
 import { InfinitySpin } from "react-loader-spinner";
 import ItemCard from "../components/ItemCard";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,6 +27,18 @@ const Profile = () => {
       });
   }, []);
 
+  const deleteItem = (id) => {
+    axios.post("/api/deleteItem", { id: id }).then((res) => {
+      console.log(res.data);
+      setItems(items.filter((item) => item._id !== id));
+    });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("details");
+    navigate("/");
+  };
+
   return (
     <div className="bg-gray-800">
       <div className="max-w-5xl mx-auto min-h-screen bg-white p-6 rounded-lg shadow-md">
@@ -37,22 +52,39 @@ const Profile = () => {
           </div>
         ) : (
           <div>
-            <div className="mt-4 text-xl text-red-600 font-semibold">
-              <span className="text-gray-800">Username : </span> {user.name}
+            <div className="mt-4 text-xl flex justify-between text-red-600 font-semibold">
+              <div>
+                <span className="text-gray-800">Username : </span> {user.name}
+              </div>
+              <button
+                className=" bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-base py-1 px-2 rounded-lg w-fit"
+                onClick={handleLogout}
+              >
+                Log out
+              </button>
             </div>
 
             <div className="mt-2 text-xl text-red-600 font-semibold">
               <span className="text-gray-800">Email : </span> {user.email}
             </div>
+
             <div className="mt-2 text-2xl text-gray-800 font-semibold">
               <span>Your Listings : </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {items.map((item) => (
-                <span className="flex flex-col bg-gray-200 pb-5 mt-4 rounded-lg">
+                <span
+                  key={item._id}
+                  className="flex flex-col bg-gray-200 pb-5 mt-4 rounded-lg"
+                >
                   <ItemCard key={item._id} rest={item} />
-                  <button className=" bg-red-500 text-white py-1 px-2 rounded-lg w-fit m-auto">Edit Details</button>
+                  <button
+                    onClick={() => deleteItem(item._id)}
+                    className=" bg-red-500 text-white py-1 px-2 rounded-lg w-fit m-auto"
+                  >
+                    Delete item
+                  </button>
                 </span>
               ))}
             </div>

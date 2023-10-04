@@ -40,7 +40,7 @@ const SellForm = () => {
     });
 
     console.log("Form Data to be sent : ",...formData);
-
+    
     try {
       const response = await axios.post("/api/sell", formData);
 

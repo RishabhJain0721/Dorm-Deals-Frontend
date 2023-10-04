@@ -26,6 +26,7 @@ const ItemInfo = () => {
       .then((res) => {
         localStorage.setItem("item", JSON.stringify(res.data));
         setItem(res.data);
+        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => {
