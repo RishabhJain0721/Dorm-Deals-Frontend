@@ -12,7 +12,7 @@ export default function Items() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/dashboard")
+      .get("/api/dashboard")
       .then((res) => {
         setItems(res.data);
         setSearchedItems(res.data);

@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 import { AuthContext } from "../Contexts/AuthContext";
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
 
 const Login = () => {
   const navigate = useNavigate();

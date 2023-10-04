@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
 
 const ItemInfo = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const ItemInfo = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/itemDetails", { id: id })
+      .post("/api/itemDetails", { id: id })
       .then((res) => {
         localStorage.setItem("item", JSON.stringify(res.data));
         setItem(res.data);
