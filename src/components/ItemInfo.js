@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
 
-axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
 const ItemInfo = () => {
   const { id } = useParams();
