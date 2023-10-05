@@ -10,6 +10,8 @@ export default function Items() {
   const [searchedItems, setSearchedItems] = useState([]);
   const { currentSearch } = useContext(SearchContext);
 
+  axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
+
   useEffect(() => {
     axios
       .get("/api/dashboard")
