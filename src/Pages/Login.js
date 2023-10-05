@@ -16,9 +16,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("/api/auth/login", { email, password }, {
-        withCredentials: true
-      })
+      .post("/api/auth/login", { email, password })
 
       .then((res) => {
         console.log("Login Successful");
