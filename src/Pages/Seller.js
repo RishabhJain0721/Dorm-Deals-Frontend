@@ -132,7 +132,7 @@ const SellForm = () => {
               htmlFor="itemImages"
               className="block text-white text-sm mb-2"
             >
-              Item Images (Up to 3 images)
+              Item Images (Up to 3 images each less than 500 KB)
             </label>
             <label
               htmlFor="itemImages"
