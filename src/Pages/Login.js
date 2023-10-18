@@ -1,6 +1,6 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -12,22 +12,30 @@ const Login = () => {
   const { dispatch } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post("/api/auth/login", { email, password })
 
       .then((res) => {
         console.log("Login Successful");
-        dispatch({ type: "LOGIN", payload: {name:res.data.name,token:res.data.token} });
+        dispatch({
+          type: "LOGIN",
+          payload: { name: res.data.name, token: res.data.token },
+        });
         navigate("/dashboard");
         setEmail("");
         setPassword("");
       })
       .catch((err) => {
         console.log(err);
-        alert(err.response.data.message)
+        alert(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -51,7 +59,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="text-center">
-            <BlueButton val="Login" />
+            <BlueButton val="Login" loading={loading} />
           </div>
         </form>
         <p className="mt-4 text-center">
