@@ -18,7 +18,7 @@ export default function Items() {
       .then((res) => {
         setItems(res.data);
         setSearchedItems(res.data);
-        console.log("In Items rendered on dashboard : ", res.data)
+        console.log("In Items rendered on dashboard : ", res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -45,7 +45,7 @@ export default function Items() {
           <InfinitySpin width="200" color="#424242" />
         </div>
       ) : (
-        <div className="p-5 flex flex-wrap px-10 ">
+        <div className="p-5 flex flex-wrap px-10 justify-center md:justify-start">
           {searchedItems.map((item) => (
             <ItemCard key={item._id} rest={item} />
           ))}

@@ -19,7 +19,7 @@ const SellForm = () => {
   };
 
   const clearUploads = () => {
-    setImages([]); 
+    setImages([]);
   };
 
   const handleSubmit = async (e) => {
@@ -27,8 +27,14 @@ const SellForm = () => {
 
     const formData = new FormData();
 
-    formData.append("userToken", JSON.parse(localStorage.getItem("details")).token);
-    formData.append("userName", JSON.parse(localStorage.getItem("details")).name);
+    formData.append(
+      "userToken",
+      JSON.parse(localStorage.getItem("details")).token
+    );
+    formData.append(
+      "userName",
+      JSON.parse(localStorage.getItem("details")).name
+    );
     formData.append("itemName", itemName);
     formData.append("itemCost", itemCost);
     formData.append("itemDescription", itemDescription);
@@ -39,8 +45,8 @@ const SellForm = () => {
       formData.append("images", file);
     });
 
-    console.log("Form Data to be sent : ",...formData);
-    
+    console.log("Form Data to be sent : ", ...formData);
+
     try {
       const response = await axios.post("/api/sell", formData);
 
@@ -52,7 +58,6 @@ const SellForm = () => {
       setContactNumber("");
       setPickupLocation("");
       setImages([]);
-
     } catch (error) {
       console.error("Error:", error);
     }
@@ -60,7 +65,7 @@ const SellForm = () => {
 
   return (
     <div className=" bg-gray-900">
-      <div className="container mx-auto w-1/3 p-6">
+      <div className="container mx-auto md:w-1/3 p-6">
         <h2 className="text-2xl text-white opacity-95 font-semibold mb-4">
           Sell Your Item
         </h2>
