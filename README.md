@@ -52,3 +52,50 @@ https://github.com/RishabhJain0721/Dorm-Deals-Backend
 - **Database**: MongoDB
 - **Version Control**: Git, GitHub
 
+
+## Screenshots
+   
+   ![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/380dd6c1-cec4-4212-9bb5-1efb81eee9ec)
+
+1. **Welcome Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/584e1606-c121-4f8a-ae65-9c0d4966f3c6)
+
+2. **Signup Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/27ba31ad-dff2-4254-88f3-89e53a1f26a7)
+
+3. **Login Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/7b2ef26b-7be2-439b-b985-77676a548289)
+
+4. **DashBoard Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/97eb1a45-e1ab-4d48-ab52-6b991a128d36)
+
+5. **Item Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/04fe52f8-a78e-499e-a6ba-430f698be858)
+
+6. **Item-Selling Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/053bf0b0-93fd-45d9-8dc0-7c0c4c5c5362)
+
+7. **User Profile Page**
+
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/61016287-1e87-4886-831d-d9927d88570f)
+
+8. **About Page**
+
+
+
+
+
+
+
+
+
+
+
+
+
