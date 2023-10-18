@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 
@@ -10,33 +10,36 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSignup = (e) => {
     e.preventDefault();
+    setLoading(true);
     axios
       .post("/api/auth/signup", { name, email, password })
 
       .then((res) => {
-        alert(res.data.message)
+        alert(res.data.message);
         console.log(res.data);
         setName("");
         setEmail("");
         setPassword("");
       })
       .catch((err) => {
-      if (err.response && err.response.status === 400) {
-        // If the response status is 400, it's a duplicate user
-        alert("User already exists. Please login.")
-        setName("");
-        setEmail("");
-        setPassword("");
-      }
-      else if(err.response && err.response.status === 401){
-        alert("Invalid Email");
-      } 
-      else {
-        console.log(err);
-      }
+        if (err.response && err.response.status === 400) {
+          // If the response status is 400, it's a duplicate user
+          alert("User already exists. Please login.");
+          setName("");
+          setEmail("");
+          setPassword("");
+        } else if (err.response && err.response.status === 401) {
+          alert("Invalid Email");
+        } else {
+          console.log(err);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -67,7 +70,7 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="text-center">
-            <BlueButton val="Sign Up" />
+            <BlueButton val="Sign Up" loading={loading} />
           </div>
         </form>
         <p className="mt-4 text-center">
