@@ -76,7 +76,7 @@ const ItemInfo = () => {
               Dashboard
             </Link>
           </div>
-          <div className="bg-white shadow-lg rounded-lg flex items-center mx-14 ">
+          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row">
             {/* Image Carousel */}
             <Carousel
               infiniteLoop
@@ -87,7 +87,7 @@ const ItemInfo = () => {
               }}
               showArrows={true}
               showThumbs={false}
-              className="w-1/4 p-2 cursor-pointer bg-gray-800 m-5"
+              className="md:w-1/4 p-2 cursor-pointer bg-gray-800 m-5"
             >
               <div>
                 <img
@@ -112,7 +112,7 @@ const ItemInfo = () => {
               </div>
             </Carousel>
             {/* Product Details */}
-            <div className="p-4 px-10 w-3/4 ">
+            <div className="p-4 md:px-10 md:w-3/4 ">
               {/* Product Name */}
               <h2 className="text-2xl font-semibold">{item.itemName}</h2>
 
