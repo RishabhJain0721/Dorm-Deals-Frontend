@@ -67,7 +67,7 @@ https://github.com/RishabhJain0721/Dorm-Deals-Backend
 
 3. **Login Page**
 
-![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/7b2ef26b-7be2-439b-b985-77676a548289)
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/5af6f110-28bb-4b49-bedc-a928a228c2bf)
 
 4. **DashBoard Page**
 
@@ -79,7 +79,7 @@ https://github.com/RishabhJain0721/Dorm-Deals-Backend
 
 6. **Item-Selling Page**
 
-![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/053bf0b0-93fd-45d9-8dc0-7c0c4c5c5362)
+![image](https://github.com/Kiran-Alex/Dorm-Deals-Frontend/assets/98690069/264bd0a2-5ce2-440a-ac8d-9a7f48f59420)
 
 7. **User Profile Page**
 
