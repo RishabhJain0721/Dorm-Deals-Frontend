@@ -1,6 +1,12 @@
 import React from "react";
 import { WhiteButton, YellowButton } from "../components/Buttons";
 
+/**
+ * Landing Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const LandingPage = () => {
   return (
     <div className="bg-blue-500 min-h-screen flex flex-col justify-center items-center text-center px-4">

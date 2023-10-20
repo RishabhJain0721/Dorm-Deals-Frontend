@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: Pages/Signup.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: Pages/Signup.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Input from "../components/Input";
+import { BlueButton } from "../components/Buttons";
+
+/**
+ * Sets the base URL for axios
+ *
+ * @type {string}
+ */
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
+
+/**
+ * Signup Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    axios
+      .post("/api/auth/signup", { name, email, password })
+
+      .then((res) => {
+        alert(res.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+      })
+      .catch((err) => {
+        if (err.response &amp;&amp; err.response.status === 400) {
+          // If the response status is 400, it's a duplicate user
+          alert("User already exists. Please login.");
+          setName("");
+          setEmail("");
+          setPassword("");
+        } else if (err.response &amp;&amp; err.response.status === 401) {
+          alert("Invalid Email");
+        } else {
+          console.log(err);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  return (
+    &lt;div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      &lt;div className="bg-gray-800 p-8 rounded-lg shadow-md w-96">
+        &lt;h2 className="text-2xl font-semibold mb-4 text-center">Sign Up&lt;/h2>
+        &lt;form onSubmit={handleSignup}>
+          &lt;Input
+            label="Name"
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          &lt;Input
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          &lt;Input
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          &lt;div className="text-center">
+            &lt;BlueButton val="Sign Up" loading={loading} />
+          &lt;/div>
+        &lt;/form>
+        &lt;p className="mt-4 text-center">
+          Already have an account?{" "}
+          &lt;Link to="/login" className="text-blue-500 hover:underline">
+            Log In
+          &lt;/Link>
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default Signup;
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="AboutUs.html">AboutUs</a></li>
+        <li><a href="App.html">App</a></li>
+        <li><a href="App-RequireAuth.html">RequireAuth</a></li>
+        <li><a href="AuthContextProvider.html">AuthContextProvider</a></li>
+        <li><a href="AuthReducer.html">AuthReducer</a></li>
+        <li><a href="BlueButton.html">BlueButton</a></li>
+        <li><a href="Dashboard.html">Dashboard</a></li>
+        <li><a href="Input.html">Input</a></li>
+        <li><a href="ItemCard.html">ItemCard</a></li>
+        <li><a href="ItemContextProvider.html">ItemContextProvider</a></li>
+        <li><a href="ItemInfo.html">ItemInfo</a></li>
+        <li><a href="ItemReducer.html">ItemReducer</a></li>
+        <li><a href="LandingPage.html">LandingPage</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Navbar.html">Navbar</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+        <li><a href="SearchContextProvider.html">SearchContextProvider</a></li>
+        <li><a href="SearchReducer.html">SearchReducer</a></li>
+        <li><a href="SellForm.html">SellForm</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+        <li><a href="VerifyEmail.html">VerifyEmail</a></li>
+        <li><a href="WhiteButton.html">WhiteButton</a></li>
+        <li><a href="YellowButton.html">YellowButton</a></li>
+        <li><a href="module.exports.html">exports</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 20
+      2023 10:20:23 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

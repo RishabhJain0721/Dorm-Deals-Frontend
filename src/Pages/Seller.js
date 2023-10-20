@@ -2,8 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import Input from "../components/Input";
 
+/**
+ * Sets the base URL for axios
+ *
+ * @type {string}
+ */
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
 
+/**
+ * Sell Form component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SellForm = () => {
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -14,7 +25,6 @@ const SellForm = () => {
 
   const handleImageUpload = (e) => {
     const selectedImages = Array.from(e.target.files);
-    console.log(selectedImages);
     setImages((prevImages) => [...prevImages, ...selectedImages]);
   };
 
@@ -29,11 +39,11 @@ const SellForm = () => {
 
     formData.append(
       "userToken",
-      JSON.parse(localStorage.getItem("details")).token
+      JSON.parse(localStorage.getItem("details")).token,
     );
     formData.append(
       "userName",
-      JSON.parse(localStorage.getItem("details")).name
+      JSON.parse(localStorage.getItem("details")).name,
     );
     formData.append("itemName", itemName);
     formData.append("itemCost", itemCost);

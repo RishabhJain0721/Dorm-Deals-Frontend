@@ -1,6 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Item Card component
+ * @param {Object} props - Props
+ * @param {Object} props.rest - Item details
+ * @param {string} props.rest._id - Item ID
+ * @param {string} props.rest.itemName - Item name
+ * @param {string} props.rest.itemCost - Item cost
+ * @param {string} props.rest.userName - Item username
+ * @param {Object} props.rest.image - Item image object
+ * @param {string} props.rest.buffer - Item image buffer
+ * @param {string} props.rest.mimetype - Item image mimetype
+ * @param {string} props.rest.itemName - Item name
+ * @param {string} props.rest.itemCost - Item cost
+ * @param {string} props.rest.userName - Item username
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ItemCard = (props) => {
   const navigate = useNavigate();
 

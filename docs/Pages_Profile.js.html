@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: Pages/Profile.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: Pages/Profile.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../Contexts/AuthContext";
+import { InfinitySpin } from "react-loader-spinner";
+import ItemCard from "../components/ItemCard";
+
+/**
+ * Profile Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Profile = () => {
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState();
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    /**
+     * Fetches user details and items listed by user
+     *
+     * @param {string} token - JWT token of the user
+     * @returns {void}
+     */
+    axios.post("/api/profile", { token: currentUser.token }).then((res) => {
+      setUser(res.data);
+    });
+
+    /**
+     * Fetches items listed by user
+     *
+     * @param {string} token - JWT token of the user
+     * @returns {void}
+     */
+    axios
+      .post("/api/listedItemsByUser", { token: currentUser.token })
+      .then((res) => {
+        setItems(res.data);
+        setLoading(false);
+        console.log("List of Items : ", res.data);
+      });
+  }, []);
+
+  const deleteItem = (id) => {
+    axios.post("/api/deleteItem", { id }).then((res) => {
+      setItems(items.filter((item) => item._id !== id));
+    });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("details");
+    navigate("/");
+  };
+
+  return (
+    &lt;div className="bg-gray-800">
+      &lt;div className="max-w-5xl mx-auto min-h-screen bg-white p-6 rounded-lg shadow-md">
+        &lt;h1 className="w-fit m-auto text-3xl text-white text-center font-semibold bg-red-500 rounded-xl py-2 px-5 ">
+          User Profile
+        &lt;/h1>
+
+        {loading ? (
+          &lt;div className="flex items-center justify-center h-96">
+            &lt;InfinitySpin width="200" color="#424242" />
+          &lt;/div>
+        ) : (
+          &lt;div>
+            &lt;div className="mt-4 text-xl flex justify-between text-red-600 font-semibold">
+              &lt;div>
+                &lt;span className="text-gray-800">Username : &lt;/span> {user.name}
+              &lt;/div>
+              &lt;button
+                className=" bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-base py-1 px-2 rounded-lg w-fit"
+                onClick={handleLogout}
+              >
+                Log out
+              &lt;/button>
+            &lt;/div>
+
+            &lt;div className="mt-2 text-xl text-red-600 font-semibold">
+              &lt;span className="text-gray-800">Email : &lt;/span> {user.email}
+            &lt;/div>
+
+            &lt;div className="mt-2 text-2xl text-gray-800 font-semibold">
+              &lt;span>Your Listings : &lt;/span>
+            &lt;/div>
+
+            &lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {items.map((item) => (
+                &lt;span
+                  key={item._id}
+                  className="flex flex-col bg-gray-200 pb-5 mt-4 rounded-lg"
+                >
+                  &lt;ItemCard key={item._id} rest={item} />
+                  &lt;button
+                    onClick={() => deleteItem(item._id)}
+                    className=" bg-red-500 text-white py-1 px-2 rounded-lg w-fit m-auto"
+                  >
+                    Delete item
+                  &lt;/button>
+                &lt;/span>
+              ))}
+            &lt;/div>
+          &lt;/div>
+        )}
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default Profile;
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="AboutUs.html">AboutUs</a></li>
+        <li><a href="App.html">App</a></li>
+        <li><a href="App-RequireAuth.html">RequireAuth</a></li>
+        <li><a href="AuthContextProvider.html">AuthContextProvider</a></li>
+        <li><a href="AuthReducer.html">AuthReducer</a></li>
+        <li><a href="BlueButton.html">BlueButton</a></li>
+        <li><a href="Dashboard.html">Dashboard</a></li>
+        <li><a href="Input.html">Input</a></li>
+        <li><a href="ItemCard.html">ItemCard</a></li>
+        <li><a href="ItemContextProvider.html">ItemContextProvider</a></li>
+        <li><a href="ItemInfo.html">ItemInfo</a></li>
+        <li><a href="ItemReducer.html">ItemReducer</a></li>
+        <li><a href="LandingPage.html">LandingPage</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Navbar.html">Navbar</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+        <li><a href="SearchContextProvider.html">SearchContextProvider</a></li>
+        <li><a href="SearchReducer.html">SearchReducer</a></li>
+        <li><a href="SellForm.html">SellForm</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+        <li><a href="VerifyEmail.html">VerifyEmail</a></li>
+        <li><a href="WhiteButton.html">WhiteButton</a></li>
+        <li><a href="YellowButton.html">YellowButton</a></li>
+        <li><a href="module.exports.html">exports</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 20
+      2023 10:20:23 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

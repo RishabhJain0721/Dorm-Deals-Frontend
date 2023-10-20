@@ -1,9 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaSearch, FaCaretDown, FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaSearch, FaTimes } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
 import { SearchContext } from "../Contexts/SearchContext";
 
+/**
+ * Navbar component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -55,52 +61,6 @@ const Navbar = () => {
 
           {/* Tab Section */}
           <div className="flex justify-center space-y-2 md:space-x-4 md:space-y-0 relative flex-col md:flex-row items-center">
-            {/* Categories Dropdown Button */}
-            {/* <button
-            onClick={toggleDropdown}
-            className="text-white hover:text-red-500 px-4 transition duration-300 ease-in-out flex items-center"
-          >
-            Categories
-            <FaCaretDown className="ml-2" />
-          </button> */}
-            {/* {isDropdownOpen && (
-            <div className="absolute left-0 mt-8 w-48 bg-white border border-gray-300 rounded-lg shadow-md">
-              <ul className="py-2">
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Electronics
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Electronics
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Electronics
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Electronics
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )} */}
             <Link
               to="/dashboard"
               className="text-white hover:text-red-500 px-4 transition duration-300 ease-in-out"

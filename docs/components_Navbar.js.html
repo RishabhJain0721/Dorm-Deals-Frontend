@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: components/Navbar.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: components/Navbar.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaBars, FaSearch, FaTimes } from "react-icons/fa";
+import { IoPersonOutline } from "react-icons/io5";
+import { SearchContext } from "../Contexts/SearchContext";
+
+/**
+ * Navbar component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Navbar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const { searchDispatch } = useContext(SearchContext);
+
+  const searchInputHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const searchSubmitHandler = () => {
+    searchDispatch({
+      type: "SEARCHSTARTED",
+      payload: { value: searchInput },
+    });
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    &lt;>
+      &lt;nav className="bg-gray-900 p-4 flex justify-between items-center relative">
+        {/* Left Section */}
+        &lt;div className="text-white text-2xl font-bold ml-8 flex items-center">
+          DormDeals&lt;span className="text-red-500 text-3xl">.&lt;/span>
+        &lt;/div>
+
+        &lt;div
+          className={`flex-col md:flex-row justify-between items-center absolute md:static inset-x-0 top-full bg-gray-900 gap-2 py-2 md:py-0 ${
+            isDropdownOpen ? "flex" : "hidden md:flex"
+          }`}
+        >
+          {/* Middle Section */}
+          &lt;div className="md:w-1/4 flex">
+            &lt;input
+              onChange={searchInputHandler}
+              type="text"
+              className="w-full px-2 py-1 border rounded-s-2xl"
+              placeholder="Search..."
+            />
+            &lt;button
+              onClick={searchSubmitHandler}
+              className="px-4 bg-red-600 rounded-e-3xl"
+            >
+              &lt;FaSearch className="text-white" />
+            &lt;/button>
+          &lt;/div>
+
+          {/* Tab Section */}
+          &lt;div className="flex justify-center space-y-2 md:space-x-4 md:space-y-0 relative flex-col md:flex-row items-center">
+            &lt;Link
+              to="/dashboard"
+              className="text-white hover:text-red-500 px-4 transition duration-300 ease-in-out"
+            >
+              All Items
+            &lt;/Link>
+            &lt;Link
+              to="/about"
+              className="text-white hover:text-red-500 px-4 transition duration-300 ease-in-out"
+            >
+              About us
+            &lt;/Link>
+            &lt;Link
+              to="/dashboard/sell-item"
+              className="text-white bg-red-500 rounded-3xl hover:text-red-500 px-4 transition duration-300 ease-in-out"
+            >
+              Sell
+            &lt;/Link>
+          &lt;/div>
+
+          {/* Right Section */}
+          &lt;div className="text-white flex items-center">
+            &lt;div className="rounded-full flex justify-center items-center h-8 w-8 ">
+              &lt;IoPersonOutline />
+            &lt;/div>
+            &lt;Link to="/dashboard/profile" className="hover:underline">
+              My Account
+            &lt;/Link>
+          &lt;/div>
+        &lt;/div>
+        &lt;button
+          className="text-white hover:text-slate-200 block md:hidden"
+          onClick={toggleDropdown}
+        >
+          {isDropdownOpen ? &lt;FaTimes /> : &lt;FaBars />}
+        &lt;/button>
+      &lt;/nav>
+      &lt;div className="bg-red-500 h-0.5">&lt;/div>
+    &lt;/>
+  );
+};
+
+export default Navbar;
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="AboutUs.html">AboutUs</a></li>
+        <li><a href="App.html">App</a></li>
+        <li><a href="App-RequireAuth.html">RequireAuth</a></li>
+        <li><a href="AuthContextProvider.html">AuthContextProvider</a></li>
+        <li><a href="AuthReducer.html">AuthReducer</a></li>
+        <li><a href="BlueButton.html">BlueButton</a></li>
+        <li><a href="Dashboard.html">Dashboard</a></li>
+        <li><a href="Input.html">Input</a></li>
+        <li><a href="ItemCard.html">ItemCard</a></li>
+        <li><a href="ItemContextProvider.html">ItemContextProvider</a></li>
+        <li><a href="ItemInfo.html">ItemInfo</a></li>
+        <li><a href="ItemReducer.html">ItemReducer</a></li>
+        <li><a href="LandingPage.html">LandingPage</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Navbar.html">Navbar</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+        <li><a href="SearchContextProvider.html">SearchContextProvider</a></li>
+        <li><a href="SearchReducer.html">SearchReducer</a></li>
+        <li><a href="SellForm.html">SellForm</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+        <li><a href="VerifyEmail.html">VerifyEmail</a></li>
+        <li><a href="WhiteButton.html">WhiteButton</a></li>
+        <li><a href="YellowButton.html">YellowButton</a></li>
+        <li><a href="module.exports.html">exports</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 20
+      2023 10:20:23 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

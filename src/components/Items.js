@@ -4,12 +4,23 @@ import axios from "axios";
 import { SearchContext } from "../Contexts/SearchContext";
 import { InfinitySpin } from "react-loader-spinner";
 
+/**
+ * Items component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export default function Items() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchedItems, setSearchedItems] = useState([]);
   const { currentSearch } = useContext(SearchContext);
 
+  /**
+   * Sets the base URL for axios
+   *
+   * @type {string}
+   */
   axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
   useEffect(() => {

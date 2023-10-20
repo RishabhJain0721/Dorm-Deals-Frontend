@@ -4,8 +4,19 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 
+/**
+ * Sets the base URL for axios
+ *
+ * @type {string}
+ */
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
+/**
+ * Signup Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +31,6 @@ const Signup = () => {
 
       .then((res) => {
         alert(res.data.message);
-        console.log(res.data);
         setName("");
         setEmail("");
         setPassword("");

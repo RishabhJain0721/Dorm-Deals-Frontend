@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: Pages/Seller.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: Pages/Seller.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import React, { useState } from "react";
+import axios from "axios";
+import Input from "../components/Input";
+
+/**
+ * Sets the base URL for axios
+ *
+ * @type {string}
+ */
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
+
+/**
+ * Sell Form component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const SellForm = () => {
+  const [itemName, setItemName] = useState("");
+  const [itemDescription, setItemDescription] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [pickupLocation, setPickupLocation] = useState("");
+  const [itemCost, setItemCost] = useState("");
+  const [images, setImages] = useState([]);
+
+  const handleImageUpload = (e) => {
+    const selectedImages = Array.from(e.target.files);
+    setImages((prevImages) => [...prevImages, ...selectedImages]);
+  };
+
+  const clearUploads = () => {
+    setImages([]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append(
+      "userToken",
+      JSON.parse(localStorage.getItem("details")).token,
+    );
+    formData.append(
+      "userName",
+      JSON.parse(localStorage.getItem("details")).name,
+    );
+    formData.append("itemName", itemName);
+    formData.append("itemCost", itemCost);
+    formData.append("itemDescription", itemDescription);
+    formData.append("contactNumber", contactNumber);
+    formData.append("pickupLocation", pickupLocation);
+
+    Array.from(images).forEach((file) => {
+      formData.append("images", file);
+    });
+
+    console.log("Form Data to be sent : ", ...formData);
+
+    try {
+      const response = await axios.post("/api/sell", formData);
+
+      console.log("Response from server:", response.data);
+
+      setItemName("");
+      setItemCost("");
+      setItemDescription("");
+      setContactNumber("");
+      setPickupLocation("");
+      setImages([]);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  return (
+    &lt;div className=" bg-gray-900">
+      &lt;div className="container mx-auto md:w-1/3 p-6">
+        &lt;h2 className="text-2xl text-white opacity-95 font-semibold mb-4">
+          Sell Your Item
+        &lt;/h2>
+        &lt;form
+          onSubmit={handleSubmit}
+          action="/api/sell"
+          method="post"
+          type="multipart/form-data"
+        >
+          &lt;div className="mb-4">
+            &lt;Input
+              label="Item Name"
+              name="itemName"
+              type="text"
+              placeholder="Enter item name"
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+            />
+          &lt;/div>
+          &lt;div className="mb-4 w-1/2">
+            &lt;Input
+              label="Cost (Rs)"
+              name="itemCost"
+              type="number"
+              placeholder="Enter item cost"
+              value={itemCost}
+              onChange={(e) => setItemCost(e.target.value)}
+            />
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;label
+              htmlFor="itemDescription"
+              className="block text-white text-sm mb-2"
+            >
+              Description (300 words max)
+            &lt;/label>
+            &lt;textarea
+              rows="4"
+              name="itemDescription"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              placeholder="Enter item description"
+              value={itemDescription}
+              onChange={(e) => setItemDescription(e.target.value)}
+              required
+            >&lt;/textarea>
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;Input
+              label="Contact Number"
+              name="contactNumber"
+              type="number"
+              placeholder="Enter contact number"
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+            />
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;Input
+              label="Pickup Location"
+              name="pickupLocation"
+              type="text"
+              placeholder="Enter pickup location"
+              value={pickupLocation}
+              onChange={(e) => setPickupLocation(e.target.value)}
+            />
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;label
+              htmlFor="itemImages"
+              className="block text-white text-sm mb-2"
+            >
+              Item Images (Up to 3 images each less than 500 KB)
+            &lt;/label>
+            &lt;label
+              htmlFor="itemImages"
+              className="bg-red-500 hover:bg-red-600 mb-2 text-white px-3 py-2 rounded-lg cursor-pointer transition duration-300 ease-in-out"
+            >
+              Upload Images
+            &lt;/label>
+            &lt;button
+              type="button"
+              className="bg-gray-500 hover:bg-gray-600 text-white px-3 py-2 rounded-lg cursor-pointer ml-2 transition duration-300 ease-in-out"
+              onClick={clearUploads}
+            >
+              Clear Uploads
+            &lt;/button>
+            &lt;input
+              type="file"
+              name="images"
+              id="itemImages"
+              className="hidden"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+            />
+            {images.length > 0 &amp;&amp; (
+              &lt;div className="mt-2">
+                &lt;p className="font-semibold text-white text-sm mb-2 mt-5">
+                  Uploaded Images:
+                &lt;/p>
+                {images.map((image, index) => (
+                  &lt;img
+                    key={index}
+                    src={URL.createObjectURL(image)}
+                    alt={`Uploaded ${index + 1}`}
+                    className="mt-2 max-h-40"
+                  />
+                ))}
+              &lt;/div>
+            )}
+          &lt;/div>
+
+          &lt;button
+            type="submit"
+            className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition duration-300 ease-in-out"
+          >
+            Submit
+          &lt;/button>
+        &lt;/form>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default SellForm;
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="AboutUs.html">AboutUs</a></li>
+        <li><a href="App.html">App</a></li>
+        <li><a href="App-RequireAuth.html">RequireAuth</a></li>
+        <li><a href="AuthContextProvider.html">AuthContextProvider</a></li>
+        <li><a href="AuthReducer.html">AuthReducer</a></li>
+        <li><a href="BlueButton.html">BlueButton</a></li>
+        <li><a href="Dashboard.html">Dashboard</a></li>
+        <li><a href="Input.html">Input</a></li>
+        <li><a href="ItemCard.html">ItemCard</a></li>
+        <li><a href="ItemContextProvider.html">ItemContextProvider</a></li>
+        <li><a href="ItemInfo.html">ItemInfo</a></li>
+        <li><a href="ItemReducer.html">ItemReducer</a></li>
+        <li><a href="LandingPage.html">LandingPage</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Navbar.html">Navbar</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+        <li><a href="SearchContextProvider.html">SearchContextProvider</a></li>
+        <li><a href="SearchReducer.html">SearchReducer</a></li>
+        <li><a href="SellForm.html">SellForm</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+        <li><a href="VerifyEmail.html">VerifyEmail</a></li>
+        <li><a href="WhiteButton.html">WhiteButton</a></li>
+        <li><a href="YellowButton.html">YellowButton</a></li>
+        <li><a href="module.exports.html">exports</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 20
+      2023 10:20:23 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

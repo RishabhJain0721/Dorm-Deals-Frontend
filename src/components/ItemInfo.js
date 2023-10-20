@@ -4,16 +4,22 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faIndianRupeeSign,
   faMapPin,
   faPhoneVolume,
   faUser,
-  faIndianRupeeSign,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
 
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
+/**
+ * Item Info component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ItemInfo = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -26,7 +32,6 @@ const ItemInfo = () => {
       .then((res) => {
         localStorage.setItem("item", JSON.stringify(res.data));
         setItem(res.data);
-        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => {

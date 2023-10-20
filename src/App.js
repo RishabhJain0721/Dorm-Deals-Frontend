@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "./Pages/Landing";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -13,9 +13,22 @@ import { AuthContext } from "./Contexts/AuthContext";
 import { ItemContextProvider } from "./Contexts/ItemContext";
 import { SearchContextProvider } from "./Contexts/SearchContext";
 
+/**
+ * App component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const App = () => {
   const { currentUser } = useContext(AuthContext);
 
+  /**
+   * Component to check if user is authenticated
+   *
+   * @param children - Child components
+   * @returns {*|JSX.Element}
+   * @constructor
+   */
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };

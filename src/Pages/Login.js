@@ -1,12 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 import { AuthContext } from "../Contexts/AuthContext";
 
+/**
+ * Sets the base URL for axios
+ *
+ * @type {string}
+ */
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
+/**
+ * Login Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Login = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(AuthContext);
@@ -19,7 +30,6 @@ const Login = () => {
     setLoading(true);
     axios
       .post("/api/auth/login", { email, password })
-
       .then((res) => {
         console.log("Login Successful");
         dispatch({

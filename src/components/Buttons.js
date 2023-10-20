@@ -1,9 +1,19 @@
 import React from "react";
-import { InfinitySpin, TailSpin } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * White Button component
+ *
+ * @param {Object} props - Props
+ * @param {string} props.navigation - Navigation path
+ * @param {string} props.val - Button text
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const WhiteButton = (props) => {
   const navigate = useNavigate();
+
   return (
     <button
       className="bg-white text-blue-500 text-lg font-semibold px-6 py-3 rounded-full hover:bg-blue-200 hover:text-blue-600 transition duration-300"
@@ -14,6 +24,15 @@ const WhiteButton = (props) => {
   );
 };
 
+/**
+ * Yellow Button component
+ *
+ * @param {Object} props - Props
+ * @param {string} props.navigation - Navigation path
+ * @param {string} props.val - Button text
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const YellowButton = (props) => {
   const navigate = useNavigate();
 
@@ -27,6 +46,16 @@ const YellowButton = (props) => {
   );
 };
 
+/**
+ * Blue Button component
+ *
+ * @param {Object} props - Props
+ * @param {boolean} props.loading - Loading state
+ * @param {string} props.navigation - Navigation path
+ * @param {string} props.val - Button text
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const BlueButton = (props) => {
   const navigate = useNavigate();
 

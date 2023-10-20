@@ -3,6 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
 
+/**
+ * Verify Email Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const VerifyEmail = () => {
   const navigate = useNavigate();
 
@@ -15,7 +21,6 @@ const VerifyEmail = () => {
     axios
       .get(`/verify-email?token=${token}`)
       .then((response) => {
-        console.log(response);
         navigate("/login");
       })
       .catch((error) => {

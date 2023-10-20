@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: components/ItemInfo.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: components/ItemInfo.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faIndianRupeeSign,
+  faMapPin,
+  faPhoneVolume,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { InfinitySpin } from "react-loader-spinner";
+
+axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
+
+/**
+ * Item Info component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const ItemInfo = () => {
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [item, setItem] = useState({});
+  let blobURLs = [];
+
+  useEffect(() => {
+    axios
+      .post("/api/itemDetails", { id: id })
+      .then((res) => {
+        localStorage.setItem("item", JSON.stringify(res.data));
+        setItem(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // Function to convert base64 string to ArrayBuffer
+  function base64ToArrayBuffer(base64) {
+    let binaryString = window.atob(base64);
+    let len = binaryString.length;
+    let bytes = new Uint8Array(len);
+    for (let i = 0; i &lt; len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes.buffer;
+  }
+
+  // Map function to convert each image to a blob URL
+  if (!loading) {
+    blobURLs = item.images.map((img) => {
+      const base64Image = img.buffer;
+      const imageType = img.mimetype;
+      const arrayBuffer = base64ToArrayBuffer(base64Image);
+      const blob = new Blob([arrayBuffer], { type: imageType });
+      const blobUrl = URL.createObjectURL(blob);
+      return blobUrl;
+    });
+  }
+
+  return (
+    &lt;>
+      {loading ? (
+        &lt;div className="flex items-center justify-center h-screen">
+          &lt;InfinitySpin width="200" color="#424242" />
+        &lt;/div>
+      ) : (
+        &lt;div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">
+          &lt;div className=" items-start w-full m-5 px-14">
+            &lt;Link
+              to="/dashboard"
+              onClick={() => {
+                localStorage.removeItem("item");
+              }}
+              className="text-white bg-red-500 rounded-3xl hover:bg-red-700 px-6 py-2 transition duration-300 ease-in-out"
+            >
+              Dashboard
+            &lt;/Link>
+          &lt;/div>
+          &lt;div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row">
+            {/* Image Carousel */}
+            &lt;Carousel
+              infiniteLoop
+              autoPlay
+              swipeable
+              onClickItem={(index) => {
+                window.open(blobURLs[index], "_blank");
+              }}
+              showArrows={true}
+              showThumbs={false}
+              className="md:w-1/4 p-2 cursor-pointer bg-gray-800 m-5"
+            >
+              &lt;div>
+                &lt;img
+                  src={blobURLs[0]}
+                  className=" h-40 object-cover"
+                  alt="Product"
+                />
+              &lt;/div>
+              &lt;div>
+                &lt;img
+                  src={blobURLs[1]}
+                  className="h-40 object-cover"
+                  alt="Product"
+                />
+              &lt;/div>
+              &lt;div>
+                &lt;img
+                  src={blobURLs[2]}
+                  className="h-40 object-cover"
+                  alt="Product"
+                />
+              &lt;/div>
+            &lt;/Carousel>
+            {/* Product Details */}
+            &lt;div className="p-4 md:px-10 md:w-3/4 ">
+              {/* Product Name */}
+              &lt;h2 className="text-2xl font-semibold">{item.itemName}&lt;/h2>
+
+              {/* Price */}
+              &lt;p className="text-red-600 text-md mb-4">
+                {" "}
+                &lt;FontAwesomeIcon icon={faIndianRupeeSign} /> {item.itemCost}
+              &lt;/p>
+              &lt;hr />
+
+              {/* Description */}
+              &lt;p className="text-gray-700 mt-2">{item.itemDescription}&lt;/p>
+
+              {/* Provider Details */}
+              &lt;div className="mt-4">
+                &lt;p className="font-semibold text-xl mb-3">Provider Details&lt;/p>
+                &lt;p className="py-1 ">
+                  {" "}
+                  &lt;FontAwesomeIcon icon={faUser} size="xl" />{" "}
+                  &lt;span className="mx-2"> {item.userName} &lt;/span>
+                &lt;/p>
+                &lt;p className="py-1 ">
+                  {" "}
+                  &lt;FontAwesomeIcon icon={faPhoneVolume} fade size="xl" />{" "}
+                  &lt;span className="mx-2"> {item.contactNumber}&lt;/span>
+                &lt;/p>
+                &lt;p className="py-1 ">
+                  &lt;FontAwesomeIcon icon={faMapPin} flip size="2xl" />{" "}
+                  &lt;span className="mx-2">{item.pickupLocation}&lt;/span>
+                &lt;/p>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      )}
+    &lt;/>
+  );
+};
+
+export default ItemInfo;
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="AboutUs.html">AboutUs</a></li>
+        <li><a href="App.html">App</a></li>
+        <li><a href="App-RequireAuth.html">RequireAuth</a></li>
+        <li><a href="AuthContextProvider.html">AuthContextProvider</a></li>
+        <li><a href="AuthReducer.html">AuthReducer</a></li>
+        <li><a href="BlueButton.html">BlueButton</a></li>
+        <li><a href="Dashboard.html">Dashboard</a></li>
+        <li><a href="Input.html">Input</a></li>
+        <li><a href="ItemCard.html">ItemCard</a></li>
+        <li><a href="ItemContextProvider.html">ItemContextProvider</a></li>
+        <li><a href="ItemInfo.html">ItemInfo</a></li>
+        <li><a href="ItemReducer.html">ItemReducer</a></li>
+        <li><a href="LandingPage.html">LandingPage</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Navbar.html">Navbar</a></li>
+        <li><a href="Profile.html">Profile</a></li>
+        <li><a href="SearchContextProvider.html">SearchContextProvider</a></li>
+        <li><a href="SearchReducer.html">SearchReducer</a></li>
+        <li><a href="SellForm.html">SellForm</a></li>
+        <li><a href="Signup.html">Signup</a></li>
+        <li><a href="VerifyEmail.html">VerifyEmail</a></li>
+        <li><a href="WhiteButton.html">WhiteButton</a></li>
+        <li><a href="YellowButton.html">YellowButton</a></li>
+        <li><a href="module.exports.html">exports</a></li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Oct 20
+      2023 10:20:23 GMT+0200 (Central European Summer Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>

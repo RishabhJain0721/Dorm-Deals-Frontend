@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Contexts/AuthContext";
 import { InfinitySpin } from "react-loader-spinner";
 import ItemCard from "../components/ItemCard";
 
+/**
+ * Profile Page component
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Profile = () => {
   const navigate = useNavigate();
 
@@ -14,10 +20,22 @@ const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
+    /**
+     * Fetches user details and items listed by user
+     *
+     * @param {string} token - JWT token of the user
+     * @returns {void}
+     */
     axios.post("/api/profile", { token: currentUser.token }).then((res) => {
       setUser(res.data);
-      console.log(res.data);
     });
+
+    /**
+     * Fetches items listed by user
+     *
+     * @param {string} token - JWT token of the user
+     * @returns {void}
+     */
     axios
       .post("/api/listedItemsByUser", { token: currentUser.token })
       .then((res) => {
@@ -28,8 +46,7 @@ const Profile = () => {
   }, []);
 
   const deleteItem = (id) => {
-    axios.post("/api/deleteItem", { id: id }).then((res) => {
-      console.log(res.data);
+    axios.post("/api/deleteItem", { id }).then((res) => {
       setItems(items.filter((item) => item._id !== id));
     });
   };
