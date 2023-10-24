@@ -52,20 +52,20 @@ const Profile = () => {
           </div>
         ) : (
           <div>
-            <div className="mt-4 text-xl flex justify-between text-red-600 font-semibold">
+            <div className="my-7 mx-auto w-[97%] sm:w-[75%] md:w-[70%] text-xl text-red-600 font-semibold flex flex-col gap-7 p-4 sm:p-10 border-2 border-solid border-red-600 rounded-xl ">
               <div>
                 <span className="text-gray-800">Username : </span> {user.name}
               </div>
+              <div className="text-xl text-red-600 font-semibold">
+                <span className="text-gray-800">Email : </span>
+                <span className="break-words">{user.email}</span>
+              </div>
               <button
-                className=" bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-base py-1 px-2 rounded-lg w-fit"
+                className="bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-base py-2 px-7 rounded-lg w-fit"
                 onClick={handleLogout}
               >
                 Log out
               </button>
-            </div>
-
-            <div className="mt-2 text-xl text-red-600 font-semibold">
-              <span className="text-gray-800">Email : </span> {user.email}
             </div>
 
             <div className="mt-2 text-2xl text-gray-800 font-semibold">
