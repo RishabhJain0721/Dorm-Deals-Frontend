@@ -26,7 +26,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-gray-900 p-4 flex justify-between items-center relative">
+      <nav className="bg-gray-900 p-4 flex justify-between items-center relative"
+      style={{
+        borderBottom: '2px solid rgb(239, 68, 68)',
+      }}>
         {/* Left Section */}
         <div className="text-white text-2xl font-bold ml-8 flex items-center">
           DormDeals<span className="text-red-500 text-3xl">.</span>
@@ -138,7 +141,8 @@ const Navbar = () => {
           {isDropdownOpen ? <FaTimes /> : <FaBars />}
         </button>
       </nav>
-      <div className="bg-red-500 h-0.5"></div>
+      
+      
     </>
   );
 };
