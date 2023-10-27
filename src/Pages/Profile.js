@@ -53,40 +53,50 @@ const Profile = () => {
         ) : (
           <div>
             <div className="my-7 mx-auto w-[97%] sm:w-[75%] md:w-[70%] text-xl text-red-600 font-semibold flex flex-col gap-7 p-4 sm:p-10 border-2 border-solid border-red-600 rounded-xl ">
-              <div>
-                <span className="text-gray-800">Username : </span> {user.name}
-              </div>
-              <div className="text-xl text-red-600 font-semibold">
-                <span className="text-gray-800">Email : </span>
-                <span className="break-words">{user.email}</span>
-              </div>
-              <button
-                className="bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-base py-2 px-7 rounded-lg w-fit"
-                onClick={handleLogout}
-              >
-                Log out
-              </button>
-            </div>
-
-            <div className="mt-2 text-2xl text-gray-800 font-semibold">
-              <span>Your Listings : </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((item) => (
-                <span
-                  key={item._id}
-                  className="flex flex-col bg-gray-200 pb-5 mt-4 rounded-lg"
-                >
-                  <ItemCard key={item._id} rest={item} />
+              {user ? (
+                <div>
+                  <div>
+                    <span className="text-gray-800">Username : </span> {user.name}
+                  </div>
+                  <div className="text-xl text-red-600 font-semibold">
+                    <span className="text-gray-800">Email : </span>
+                    <span className="break-words">{user.email}</span>
+                  </div>
                   <button
-                    onClick={() => deleteItem(item._id)}
-                    className=" bg-red-500 text-white py-1 px-2 rounded-lg w-fit m-auto"
+                    className="bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-base py-2 px-7 rounded-lg w-fit"
+                    onClick={handleLogout}
                   >
-                    Delete item
+                    Log out
                   </button>
-                </span>
-              ))}
+                </div>
+              ) : (
+                <div>Loading user data...</div>
+              )}
+
+              <div className="mt-2 text-2xl text-gray-800 font-semibold">
+                <span>Your Listings : </span>
+              </div>
+
+              {items ? (
+                <div className="max-w-sm:flex grid grid-cols-2">
+                  {items.map((item) => (
+                    <div
+                      key={item._id}
+                      className="bg-grey-800 w-[80rem]"
+                    >
+                      <ItemCard key={item._id} rest={item} />
+                      <button
+                        onClick={() => deleteItem(item._id)}
+                        className="bg-red-500 text-white py-1 px-2 rounded-lg w-fit m-auto ml-4"
+                      >
+                        Delete item
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div>No items to display</div>
+              )}
             </div>
           </div>
         )}
