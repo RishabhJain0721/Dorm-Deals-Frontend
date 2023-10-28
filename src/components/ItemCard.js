@@ -15,31 +15,31 @@ const ItemCard = (props) => {
   return (
     <div
       onClick={moreInfo}
-      className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4"
+      className={`bg-white p-4 ${props.width === "full" ? "w-full" : `sm:w-1/2 md:w-1/4 lg:w-${props.width} xl:w-${props.width}`} cursor-pointer`}
     >
-      <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-xl h-full hover:shadow-2xl">
+      <div className="card flex flex-col rounded-lg shadow-md hover:shadow-lg">
         <div className="prod-img">
           <img
             src={src}
             alt={props.rest.itemName}
-            className="w-full h-40 sm:h-48 md:h-56 object-cover object-center"
+            className="w-full h-48 sm:h-64 object-cover object-center"
           />
         </div>
-        <div className="prod-title">
-          <p className="text-xl sm:text-3xl uppercase text-gray-900 font-bold">
+        <div className="prod-title p-4">
+          <p className="text-lg sm:text-xl text-gray-900 font-bold">
             {props.rest.itemName}
           </p>
-          <p>Provider : {props.rest.userName} </p>
+          <p className="text-gray-700">Provider: {props.rest.userName}</p>
         </div>
-        <div className="prod-info grid gap-6">
-          <p className="font-bold text-xl sm:text-2xl">Rs. {props.rest.itemCost}</p>
-          <div className="flex justify-center items-center">
-            <button
-              className="px-6 py-2 bg-gray-900 text-white transition ease-in duration-200 uppercase rounded-full hover:bg-red-500 hover:text-white border-2 focus:outline-none"
-            >
-              Buy Now
-            </button>
-          </div>
+        <div className="prod-info grid grid-cols-2 gap-4 p-4">
+          <p className="text-lg sm:text-xl font-bold text-gray-900">
+            Rs. {props.rest.itemCost}
+          </p>
+          <button
+            className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
+          >
+            Buy Now
+          </button>
         </div>
       </div>
     </div>

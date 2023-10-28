@@ -77,26 +77,26 @@ const Profile = () => {
                 <span>Your Listings : </span>
               </div>
 
-              {items ? (
-                <div className="max-w-sm:flex grid grid-cols-2">
-                  {items.map((item) => (
-                    <div
-                      key={item._id}
-                      className="bg-grey-800 w-[80rem]"
+              {items.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {items.map((item) => (
+                  <div
+                    key={item._id}
+                    className="bg-white rounded-lg shadow-md p-4"
+                  >
+                    <ItemCard rest={item} width="full" />
+                    <button
+                      onClick={() => deleteItem(item._id)}
+                      className="bg-red-500 text-white py-1 px-4 rounded-lg w-fit mx-auto mt-3"
                     >
-                      <ItemCard key={item._id} rest={item} />
-                      <button
-                        onClick={() => deleteItem(item._id)}
-                        className="bg-red-500 text-white py-1 px-2 rounded-lg w-fit m-auto ml-4"
-                      >
-                        Delete item
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div>No items to display</div>
-              )}
+                      Delete Item
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>No items to display</div>
+            )}
             </div>
           </div>
         )}
