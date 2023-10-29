@@ -12,6 +12,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+
+  // Function to handle signup
   const handleSignup = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -20,7 +22,6 @@ const Signup = () => {
 
       .then((res) => {
         alert(res.data.message);
-        console.log(res.data);
         setName("");
         setEmail("");
         setPassword("");

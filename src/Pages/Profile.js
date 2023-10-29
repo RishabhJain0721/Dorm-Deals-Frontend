@@ -13,20 +13,20 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const { currentUser } = useContext(AuthContext);
 
+  // Fetch user details and listed items from the database
   useEffect(() => {
     axios.post("/api/profile", { token: currentUser.token }).then((res) => {
       setUser(res.data);
-      console.log(res.data);
     });
     axios
       .post("/api/listedItemsByUser", { token: currentUser.token })
       .then((res) => {
         setItems(res.data);
         setLoading(false);
-        console.log("List of Items : ", res.data);
       });
   }, []);
 
+  // Delete an item from the database
   const deleteItem = (id) => {
     axios.post("/api/deleteItem", { id: id }).then((res) => {
       console.log(res.data);
@@ -53,6 +53,7 @@ const Profile = () => {
         ) : (
           <div>
             <div className="my-7 mx-auto w-[97%] sm:w-[75%] md:w-[70%] text-xl text-red-600 font-semibold flex flex-col gap-7 p-4 sm:p-10 border-2 border-solid border-red-600 rounded-xl ">
+            
               {user ? (
                 <div>
                   <div>
