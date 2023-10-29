@@ -64,7 +64,7 @@ const ItemInfo = () => {
           <InfinitySpin width="200" color="#424242" />
         </div>
       ) : (
-        <div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">\
+        <div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">
           <div className=" items-start w-full m-5 px-14">
             <Link
               to="/dashboard"
