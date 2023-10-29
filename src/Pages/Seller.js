@@ -12,9 +12,9 @@ const SellForm = () => {
   const [itemCost, setItemCost] = useState("");
   const [images, setImages] = useState([]);
 
+  
   const handleImageUpload = (e) => {
     const selectedImages = Array.from(e.target.files);
-    console.log(selectedImages);
     setImages((prevImages) => [...prevImages, ...selectedImages]);
   };
 
@@ -45,12 +45,9 @@ const SellForm = () => {
       formData.append("images", file);
     });
 
-    console.log("Form Data to be sent : ", ...formData);
-
     try {
+      
       const response = await axios.post("/api/sell", formData);
-
-      console.log("Response from server:", response.data);
 
       setItemName("");
       setItemCost("");
@@ -69,6 +66,7 @@ const SellForm = () => {
         <h2 className="text-2xl text-white opacity-95 font-semibold mb-4">
           Sell Your Item
         </h2>
+        
         <form
           onSubmit={handleSubmit}
           action="/api/sell"

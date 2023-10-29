@@ -9,10 +9,12 @@ const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const { searchDispatch } = useContext(SearchContext);
 
+  // Function to handle search input
   const searchInputHandler = (e) => {
     setSearchInput(e.target.value);
   };
 
+  // Function to handle search submit
   const searchSubmitHandler = () => {
     searchDispatch({
       type: "SEARCHSTARTED",
@@ -20,6 +22,7 @@ const Navbar = () => {
     });
   };
 
+  // Function to toggle dropdown
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };

@@ -12,6 +12,7 @@ export default function Items() {
 
   axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
+  // Fetch all items from the database
   useEffect(() => {
     axios
       .get("/api/dashboard")
@@ -26,6 +27,7 @@ export default function Items() {
       });
   }, []);
 
+  // Filter items based on search query
   useEffect(() => {
     if (items) {
       const filteredItems = items.filter((item) => {

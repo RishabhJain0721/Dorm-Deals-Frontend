@@ -14,6 +14,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+
+  // Function to handle login
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -21,7 +23,6 @@ const Login = () => {
       .post("/api/auth/login", { email, password })
 
       .then((res) => {
-        console.log("Login Successful");
         dispatch({
           type: "LOGIN",
           payload: { name: res.data.name, token: res.data.token },

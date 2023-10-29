@@ -10,8 +10,8 @@ export const ItemContext = createContext(INITIAL_STATE);
 export const ItemContextProvider = ({ children }) => {
   const [itemState, itemDispatch] = useReducer(ItemReducer, INITIAL_STATE);
 
+  // Save item to local storage
   useEffect(() => {
-    console.log("useEffect in ItemContextProvider is running");
     itemState.currentItem &&
       localStorage.setItem("item", JSON.stringify(itemState.currentItem));
   }, [itemState.currentItem]);  

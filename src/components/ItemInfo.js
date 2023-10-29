@@ -20,13 +20,13 @@ const ItemInfo = () => {
   const [item, setItem] = useState({});
   let blobURLs = [];
 
+  // Fetch item details from the database
   useEffect(() => {
     axios
       .post("/api/itemDetails", { id: id })
       .then((res) => {
         localStorage.setItem("item", JSON.stringify(res.data));
         setItem(res.data);
-        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -64,7 +64,7 @@ const ItemInfo = () => {
           <InfinitySpin width="200" color="#424242" />
         </div>
       ) : (
-        <div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">
+        <div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">\
           <div className=" items-start w-full m-5 px-14">
             <Link
               to="/dashboard"
