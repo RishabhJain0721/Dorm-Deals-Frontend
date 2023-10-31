@@ -4,10 +4,14 @@ import { useNavigate } from "react-router-dom";
 const ItemCard = (props) => {
   const navigate = useNavigate();
 
-  
-  const base64Image = props.rest.image.buffer;
-  const imageType = props.rest.image.mimetype;
-  const src = `data:${imageType};base64,${base64Image}`;
+  const base64Image = props.rest.image ? props.rest.image.buffer : null;
+  const imageType = props.rest.image ? props.rest.image.mimetype : null;
+  const placeholderImageURL =
+    "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image-768x518.jpg";
+
+  const src = props.rest.image
+    ? `data:${imageType};base64,${base64Image}`
+    : placeholderImageURL;
 
   const moreInfo = async () => {
     navigate(`/dashboard/item/${props.rest._id}`);
@@ -16,7 +20,11 @@ const ItemCard = (props) => {
   return (
     <div
       onClick={moreInfo}
-      className={`bg-white p-4 ${props.width === "full" ? "w-full" : `sm:w-1/2 md:w-1/4 lg:w-${props.width} xl:w-${props.width}`} cursor-pointer`}
+      className={`bg-white p-4 ${
+        props.width === "full"
+          ? "w-full"
+          : `sm:w-1/2 md:w-1/4 lg:w-${props.width} xl:w-${props.width}`
+      } cursor-pointer`}
     >
       <div className="card flex flex-col rounded-lg shadow-md hover:shadow-lg">
         <div className="prod-img">
@@ -36,9 +44,7 @@ const ItemCard = (props) => {
           <p className="text-lg sm:text-xl font-bold text-gray-900">
             Rs. {props.rest.itemCost}
           </p>
-          <button
-            className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
-          >
+          <button className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none">
             Buy Now
           </button>
         </div>
