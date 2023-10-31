@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Input from "../components/Input";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
 
@@ -11,8 +12,8 @@ const SellForm = () => {
   const [pickupLocation, setPickupLocation] = useState("");
   const [itemCost, setItemCost] = useState("");
   const [images, setImages] = useState([]);
+  const navigate = useNavigate();
 
-  
   const handleImageUpload = (e) => {
     const selectedImages = Array.from(e.target.files);
     setImages((prevImages) => [...prevImages, ...selectedImages]);
@@ -44,9 +45,8 @@ const SellForm = () => {
     Array.from(images).forEach((file) => {
       formData.append("images", file);
     });
-
+    navigate("/dashboard/profile");
     try {
-      
       const response = await axios.post("/api/sell", formData);
 
       setItemName("");
@@ -66,7 +66,7 @@ const SellForm = () => {
         <h2 className="text-2xl text-white opacity-95 font-semibold mb-4">
           Sell Your Item
         </h2>
-        
+
         <form
           onSubmit={handleSubmit}
           action="/api/sell"
