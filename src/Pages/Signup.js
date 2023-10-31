@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
 import CustomAlertDialogue from "../components/CustomAlertDialogue";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
