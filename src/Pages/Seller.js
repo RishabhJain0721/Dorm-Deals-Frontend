@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import CustomAlertDialogue from "../components/CustomAlertDialogue";
 
+
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
 
 const SellForm = () => {
@@ -19,6 +20,7 @@ const SellForm = () => {
   const toggleBigFileDialogue = () => {
     setBigFileDialogue(!bigFileDialogue);
   };
+
 
   const handleImageUpload = (e) => {
     let selectedImages = Array.from(e.target.files);
@@ -87,6 +89,7 @@ const SellForm = () => {
           isVisible={bigFileDialogue}
           toggleVisibility={toggleBigFileDialogue}
         />
+
         <form
           onSubmit={handleSubmit}
           action="/api/sell"

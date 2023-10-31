@@ -89,27 +89,17 @@ const ItemInfo = () => {
               showThumbs={false}
               className="md:w-1/4 p-2 cursor-pointer bg-gray-800 m-5"
             >
-              <div>
-                <img
-                  src={blobURLs[0]}
-                  className=" h-40 object-cover"
-                  alt="Product"
-                />
-              </div>
-              <div>
-                <img
-                  src={blobURLs[1]}
-                  className="h-40 object-cover"
-                  alt="Product"
-                />
-              </div>
-              <div>
-                <img
-                  src={blobURLs[2]}
-                  className="h-40 object-cover"
-                  alt="Product"
-                />
-              </div>
+              {blobURLs.map((url) => {
+                return (
+                  <div key={url.id}>
+                    <img
+                      src={url}
+                      className=" h-40 object-cover"
+                      alt="Product"
+                    />
+                  </div>
+                );
+              })}
             </Carousel>
             {/* Product Details */}
             <div className="p-4 md:px-10 md:w-3/4 ">
