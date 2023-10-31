@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import { BlueButton } from "../components/Buttons";
+import CustomAlertDialogue from "../components/CustomAlertDialogue";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 
@@ -11,7 +13,17 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [verificationLinkDialogue, setVerificationLinkDialogue] =
+    useState(false);
+  const [duplicateuserDialogue, setDuplicateUserDialogue] = useState(false);
+  const navigate = useNavigate();
 
+  const toggleVerificationLinkDialogue = () => {
+    setVerificationLinkDialogue(!verificationLinkDialogue);
+  };
+  const toggleDuplicateUserDialogue = () => {
+    setDuplicateUserDialogue(!duplicateuserDialogue);
+  };
 
   // Function to handle signup
   const handleSignup = (e) => {
@@ -21,6 +33,7 @@ const Signup = () => {
       .post("/api/auth/signup", { name, email, password })
 
       .then((res) => {
+        toggleVerificationLinkDialogue();
         alert(res.data.message);
         setName("");
         setEmail("");
@@ -29,7 +42,7 @@ const Signup = () => {
       .catch((err) => {
         if (err.response && err.response.status === 400) {
           // If the response status is 400, it's a duplicate user
-          alert("User already exists. Please login.");
+          toggleDuplicateUserDialogue();
           setName("");
           setEmail("");
           setPassword("");
@@ -48,6 +61,19 @@ const Signup = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-4 text-center">Sign Up</h2>
+        <CustomAlertDialogue
+          onPressed={() => navigate("/login")}
+          title={"Verification your account"}
+          message={"A verification link has been sent to your email"}
+          isVisible={verificationLinkDialogue}
+          toggleVisibility={toggleVerificationLinkDialogue}
+        />
+        <CustomAlertDialogue
+          isVisible={duplicateuserDialogue}
+          toggleVisibility={toggleDuplicateUserDialogue}
+          title="User Already Exists"
+          message="A user is already with this email, please login"
+        />
         <form onSubmit={handleSignup}>
           <Input
             label="Name"
