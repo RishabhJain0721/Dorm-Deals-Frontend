@@ -43,7 +43,7 @@ To run the frontend locally, follow these steps:
 
 ### Note : This will only install the frontend part of the application.
 Although the project *will work* with only the frontend part installed locally(because backend is hosted), you can install the backend part too and run the whole application locally. Visit this repo for the backend :
-https://github.com/RishabhJain0721/Dorm-Deals-Backend
+https://github.com/RishabhJain0721/DormDeals-Backend
 
 ## Tech Stack
 
