@@ -5,8 +5,6 @@ import { BlueButton } from "../components/Buttons";
 import CustomAlertDialogue from "../components/CustomAlertDialogue";
 import { Link, useNavigate } from "react-router-dom";
 
-axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
-
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

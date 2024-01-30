@@ -12,6 +12,9 @@ import About from "./Pages/About";
 import { AuthContext } from "./Contexts/AuthContext";
 import { ItemContextProvider } from "./Contexts/ItemContext";
 import { SearchContextProvider } from "./Contexts/SearchContext";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://shy-ruby-bream-vest.cyclic.app";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);

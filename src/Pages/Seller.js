@@ -4,9 +4,6 @@ import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import CustomAlertDialogue from "../components/CustomAlertDialogue";
 
-
-axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
-
 const SellForm = () => {
   const [itemName, setItemName] = useState("");
   const [itemDescription, setItemDescription] = useState("");
