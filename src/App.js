@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import LandingPage from "./Pages/Landing";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -27,7 +27,7 @@ const App = () => {
     <div>
       <ItemContextProvider>
         <SearchContextProvider>
-          <HashRouter>
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
@@ -47,7 +47,7 @@ const App = () => {
               <Route path="/dashboard/item/:id" element={<ItemInfo />} />
               <Route path="/about" element={<About />} />
             </Routes>
-          </HashRouter>
+          </BrowserRouter>
         </SearchContextProvider>
       </ItemContextProvider>
     </div>
