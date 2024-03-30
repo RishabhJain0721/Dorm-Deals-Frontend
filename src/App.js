@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./Pages/Landing";
 import Login from "./Pages/Login";
@@ -11,6 +11,8 @@ import About from "./Pages/About";
 import { AuthContext } from "./Contexts/AuthContext";
 import { ItemContextProvider } from "./Contexts/ItemContext";
 import { SearchContextProvider } from "./Contexts/SearchContext";
+import "./App.css";
+import { HashLoader } from "react-spinners";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://shy-ruby-bream-vest.cyclic.app";
@@ -21,9 +23,22 @@ const App = () => {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading (true);
+    setTimeout(() => {
+      setLoading(false);
+    },4000)
 
+  }, []);
   return (
     <div>
+            {
+        loading ? 
+        <div style={{minHeight:"100vh", width: "100%", display:"flex",justifyContent:"center",alignItems:"center"}}>
+          <HashLoader color="#36d7b7" loading={loading} size={150}/>
+        </div>
+          :
       <ItemContextProvider>
         <SearchContextProvider>
           <BrowserRouter>
@@ -48,6 +63,7 @@ const App = () => {
           </BrowserRouter>
         </SearchContextProvider>
       </ItemContextProvider>
+}
     </div>
   );
 };
